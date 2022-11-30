@@ -1,0 +1,151 @@
+:root {
+    --titlebar-height: 40px;
+
+    --white: #FAFAFA;
+    --white-dimmed: #BDBDBD;
+    --cream: #d2d2d2;
+    --black: #151515;
+    --grey-light: #757575;
+    --grey-mid: #2f2f2f;
+    --grey-dark: #1e1e1e;
+    --grey-transparent: #6969696d;
+    --grey: #474747;
+    --blue: #264f78;
+    --green: #4ec9b0;
+    --yellow: #FFA000;
+    --red: #ff0000;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Cascadia Code', sans-serif;
+}
+
+*::selection {
+    background-color: var(--blue);
+}
+
+body {
+    color: var(--white);
+    background-color: var(--black);
+}
+
+.content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin-top: 40px;
+    overflow: scroll;
+    overflow-x: hidden;
+    background-color: var(--black);
+}
+
+.buffer {
+    width: 100%;
+    margin-top: 1px;
+}
+
+.stat-bar {
+    position: fixed;
+    width: 100%;
+    background-color: var(--grey-dark);
+    display: flex;
+    color: var(--white-dimmed);
+    border-width: 2px 0 0;
+    border-style: solid;
+    border-color: var(--grey-mid);
+    height: 105px;
+    padding-top: 3.75px;
+    justify-content: space-between;
+}
+
+.stats {
+    display: flex;
+}
+
+.credits {
+    margin-right: 16px;
+}
+
+.stat-bar p {
+    font-size: 13px;
+    font-weight: 350;
+    margin-left: 16px;
+}
+
+#error-counter {
+    margin-left: 22px;
+    color: var(--green);
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+    background: var(--black);
+}
+
+*::-webkit-scrollbar-corner {
+    background: var(--black);
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--grey-mid);
+}
+
+.editor-container {
+    width: 100%;
+    display: flex;
+    padding-top: 25px;
+}
+
+.code-box-container {
+    width: 100%;
+}
+
+#code-box {
+    border: none;
+    outline: none;
+    resize: none;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: normal;
+    caret-color: var(--white);
+    font-weight: 350;
+}
+
+.line {
+    height: 25px;
+    padding-top: 1px;
+    border-width: 2px 0;
+    border-color: transparent;
+    border-style: solid;
+}
+
+#active-line {
+    border-color: var(--grey-mid);
+}
+
+.line-number-container {
+    text-align: center;
+    cursor: default;
+    padding: 0 25px 0;
+}
+
+.line-number-box {
+    min-width: 17px;
+    text-align: right;
+}
+
+.line-number {
+    padding-top: 2px;
+    height: 25px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--grey-light);
+}
+
+#active-number {
+    color: var(--white-dimmed);
+}

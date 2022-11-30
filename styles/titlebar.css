@@ -1,0 +1,105 @@
+.title-bar-container {
+    height: var(--titlebar-height);
+    width: 100%;
+    position: fixed;
+    -webkit-app-region: drag;
+}
+
+.title-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--grey-dark);
+    height: 100%;
+    width: 100%;
+    border-width: 0 0 2px;
+    border-style: solid;
+    border-color: var(--grey-mid);
+}
+
+.title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    margin-left: 16px;
+    margin-right: 15px;
+    padding: 1px 7px 0;
+    border-width: 0 3px;
+    border-radius: 8px;
+    border-style: solid;
+    border-color: var(--cream);
+    color: var(--cream);
+    height: 25px;
+    margin-top: 3px;
+}
+
+.title span {
+    font-weight: 600;
+    color: var(--white);
+}
+
+.float-left {
+    width: 500px;
+    display: flex;
+}
+
+.menu-button-box {
+    height: 30px;
+    align-items: baseline;
+    display: flex;
+    -webkit-app-region: no-drag;
+}
+
+.menu-button {
+    border-radius: 6px;
+    background-color: transparent;
+    height: 25px;
+    padding-top: 2px;
+    margin: 3px 3px 0;
+    border: none;
+    color: var(--cream);
+    font-size: 13px;
+    transition: 0.1s;
+}
+
+.menu-button:hover {
+    background-color: var(--grey-transparent);
+}
+
+#options-button {
+    width: 79px;
+}
+
+#edit-button {
+    width: 54px;
+}
+
+#export-button {
+    width: 70px;
+}
+
+.app-button-box {
+    display: flex;
+    -webkit-app-region: no-drag;
+}
+
+.app-button {
+    background-color: transparent;
+    height: 38px;
+    width: 47px;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    color: var(--white);
+    font-size: 14px;
+    transition: 0.1s;
+}
+
+.app-button:hover {
+    background-color: var(--grey-transparent);
+}
+
+#close-button:hover {
+    background-color: var(--red);
+}

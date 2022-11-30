@@ -5,9 +5,14 @@
   <meta charset="UTF-8">
   <title>PseudoEdit</title>
 
+  <meta name="Content-Security-Policy"
+    value="default-src 'self'; style-src-elem 'self' https://fonts.googleapis.com/; font-src https://fonts.gstatic.com/">
+
+  <link rel="icon" href="rsc/icon.ico">
+
   <link rel="stylesheet" href="styles/main.css">
   <link rel="stylesheet" href="styles/titlebar.css">
-  <link rel="stylesheet" href="styles/intelli-box.css">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap"
@@ -35,7 +40,6 @@
 
   <div class="content" id="content">
     <div class="editor-container">
-      <div class="intelli-box" id="intelli-box"></div>
       <div class="line-number-container">
         <div class="line-number-box" id="line-number-box">
           <div class="line-number">1</div>
@@ -50,14 +54,6 @@
     </div>
     <div class="buffer" id="buffer"></div>
   </div>
-  <div class="stat-bar" id="stat-bar">
-    <div class="stats">
-      <p id="line-counter">line: 1 of 1</p>
-      <p id="error-counter">errors: 0</p>
-    </div>
-    <div class="credits">
-      <p>PseudoEdit by Carl M</p>
-    </div>
-  </div>
 </body>
+
 </html>
