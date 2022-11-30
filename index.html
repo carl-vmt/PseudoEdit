@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>PseudoEdit</title>
+
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/titlebar.css">
+  <link rel="stylesheet" href="styles/intelli-box.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="title-bar-container">
+    <div class="title-bar">
+      <div class="float-left">
+        <div class="title"><span>P</span>seudo</div>
+        <div class="menu-button-box">
+          <button id="export-button" class="menu-button">Export</button>
+          <button id="edit-button" class="menu-button">Edit</button>
+          <button id="options-button" class="menu-button">Options</button>
+        </div>
+      </div>
+      <div class="app-button-box">
+        <button id="min-button" class="app-button">─</button>
+        <button id="max-button" class="app-button">⛶</button>
+        <button id="close-button" class="app-button">✖</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content" id="content">
+    <div class="editor-container">
+      <div class="intelli-box" id="intelli-box"></div>
+      <div class="line-number-container">
+        <div class="line-number-box" id="line-number-box">
+          <div class="line-number">1</div>
+        </div>
+      </div>
+      <div class="code-box-container">
+        <div spellcheck="false" autocorrect="off" autocapitalize="off" translate="no" contenteditable="true"
+          id="code-box" role="textbox">
+          <p class="line"><br></p>
+        </div>
+      </div>
+    </div>
+    <div class="buffer" id="buffer"></div>
+  </div>
+  <div class="stat-bar" id="stat-bar">
+    <div class="stats">
+      <p id="line-counter">line: 1 of 1</p>
+      <p id="error-counter">errors: 0</p>
+    </div>
+    <div class="credits">
+      <p>PseudoEdit by Carl M</p>
+    </div>
+  </div>
+</body>
+</html>
