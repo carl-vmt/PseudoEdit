@@ -1,0 +1,26 @@
+{
+  "name": "pseudoedit",
+  "productName": "PseudoEdit",
+  "version": "1.0.0",
+  "description": "CodeEditor for PseudoCode.",
+  "main": "src/scripts/main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carl-vmt/PseudoEdit.git"
+  },
+  "keywords": [
+    "CodeEditor"
+  ],
+  "author": "Carl Mutius",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/carl-vmt/PseudoEdit/issues"
+  },
+  "homepage": "https://github.com/carl-vmt/PseudoEdit#readme",
+  "devDependencies": {
+    "electron": "^22.0.0"
+  }
+}
