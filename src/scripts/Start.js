@@ -15,32 +15,31 @@ app.on("window-all-closed", () => {
 });
 
 function createWindow() {
-  const mainWindow = new BrowserWindow({
-    title: "PseudoEdit",
-    backgroundColor: "#151515",
+  const window = new BrowserWindow({
     show: false,
-    width: 576,
-    height: 325,
+    title: "PseudoEdit",
+    tabbingIdentifier: "PseudoEdit",
+    frame: false,
     minWidth: 576,
     minHeight: 325,
-    frame: false,
+    width: 1000,
+    height: 560,
     icon: path.join(__dirname, "..", "resources", "icon.ico"),
+    backgroundColor: "#151515",
     webPreferences: {
+      disableBlinkFeatures: "Auxclick",
       nodeIntegration: true,
       contextIsolation: false,
     },
   });
 
-  
-  mainWindow.loadFile(path.join(__dirname, "..", "index.html"));
+  window.loadFile(path.join(__dirname, "..", "index.html"));
+  enableIpcCallbacks(window);
 
-  enableIpcCallbacks(mainWindow);
-
-  mainWindow.once("ready-to-show", () => {
-    mainWindow.maximize();
-    mainWindow.show();
-    mainWindow.focus();
-    mainWindow.webContents.openDevTools();
+  window.once("ready-to-show", () => {
+    window.show();
+    window.focus();
+    // window.webContents.openDevTools();
   });
 }
 
@@ -57,20 +56,20 @@ function setSecurityPolicy() {
   });
 }
 
-function enableIpcCallbacks(mainWindow) {
+function enableIpcCallbacks(window) {
   ipcMain.on("min-window", () => {
-    mainWindow.minimize();
+    window.minimize();
   });
 
   ipcMain.on("max-window", () => {
-    if (mainWindow.isMaximized()) {
-      mainWindow.unmaximize();
+    if (window.isMaximized()) {
+      window.unmaximize();
     } else {
-      mainWindow.maximize();
+      window.maximize();
     }
   });
 
   ipcMain.on("close-window", () => {
-    mainWindow.close();
+    window.close();
   });
 }

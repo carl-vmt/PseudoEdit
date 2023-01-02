@@ -3,7 +3,7 @@
   "productName": "PseudoEdit",
   "version": "1.0.0",
   "description": "CodeEditor for PseudoCode.",
-  "main": "src/scripts/main.js",
+  "main": "src/scripts/Start.js",
   "scripts": {
     "start": "electron ."
   },
@@ -21,6 +21,10 @@
   },
   "homepage": "https://github.com/carl-vmt/PseudoEdit#readme",
   "devDependencies": {
-    "electron": "^22.0.0"
+    "electron": "^22.0.0",
+    "electron-cgi": "^1.0.6"
+  },
+  "dependencies": {
+    "uuid": "^9.0.0"
   }
 }

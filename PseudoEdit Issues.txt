@@ -1,0 +1,15 @@
+ISSUES
+
+Issue #1:
+If the caret is at the end of a line and you press right arrow, it skips into the next line.
+The activeLine is then not updated in the KeyDown Event, as it's only looking for ArrowUp and ArrowDown.
+It's not that important, as the activeLine is then updated in the KeyUp event.
+The same problem occurs if the caret is at the start of a line and you press left arrow.
+
+Importance: Minor Annoyance
+
+
+IDEAS
+
+Idea #1:
+When you click on a line number, that whole line should be selected automatically.

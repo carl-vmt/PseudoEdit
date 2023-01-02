@@ -66,16 +66,16 @@
     background-color: var(--grey-transparent);
 }
 
-#options-button {
-    width: 79px;
+#export-button {
+    width: 60px;
 }
 
 #edit-button {
-    width: 54px;
+    width: 46px;
 }
 
-#export-button {
-    width: 70px;
+#options-button {
+    width: 68px;
 }
 
 .app-button-box {

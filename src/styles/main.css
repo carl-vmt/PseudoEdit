@@ -1,18 +1,21 @@
 :root {
     --titlebar-height: 40px;
+    --scrollbar-width: 10px;
+    --editor-padding: 26px;
+    --code-font-size: 14px;
+    --code-font-weight: 350;
+    --code-line-height: 25px;
 
     --white: #FAFAFA;
     --white-dimmed: #BDBDBD;
     --cream: #d2d2d2;
-    --black: #151515;
+    --grey: #474747;
     --grey-light: #757575;
     --grey-mid: #2f2f2f;
     --grey-dark: #1e1e1e;
     --grey-transparent: #6969696d;
-    --grey: #474747;
+    --black: #151515;
     --blue: #264f78;
-    --green: #4ec9b0;
-    --yellow: #FFA000;
     --red: #ff0000;
 }
 
@@ -27,62 +30,9 @@
     background-color: var(--blue);
 }
 
-body {
-    color: var(--white);
-    background-color: var(--black);
-}
-
-.content {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    margin-top: 40px;
-    overflow: scroll;
-    overflow-x: hidden;
-    background-color: var(--black);
-}
-
-.buffer {
-    width: 100%;
-    margin-top: 1px;
-}
-
-.stat-bar {
-    position: fixed;
-    width: 100%;
-    background-color: var(--grey-dark);
-    display: flex;
-    color: var(--white-dimmed);
-    border-width: 2px 0 0;
-    border-style: solid;
-    border-color: var(--grey-mid);
-    height: 105px;
-    padding-top: 3.75px;
-    justify-content: space-between;
-}
-
-.stats {
-    display: flex;
-}
-
-.credits {
-    margin-right: 16px;
-}
-
-.stat-bar p {
-    font-size: 13px;
-    font-weight: 350;
-    margin-left: 16px;
-}
-
-#error-counter {
-    margin-left: 22px;
-    color: var(--green);
-}
-
 *::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: var(--scrollbar-width);
+    height: var(--scrollbar-width);
     background: var(--black);
 }
 
@@ -94,10 +44,24 @@ body {
     background-color: var(--grey-mid);
 }
 
+body {
+    color: var(--white);
+    background-color: var(--black);
+}
+
+.content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin-top: var(--titlebar-height);
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
 .editor-container {
     width: 100%;
     display: flex;
-    padding-top: 25px;
+    padding-top: var(--editor-padding);
 }
 
 .code-box-container {
@@ -108,15 +72,14 @@ body {
     border: none;
     outline: none;
     resize: none;
-    font-size: 14px;
+    font-size: var(--code-font-size);
+    font-weight: var(--code-font-weight);
     line-height: 1.5;
     overflow-wrap: normal;
-    caret-color: var(--white);
-    font-weight: 350;
 }
 
 .line {
-    height: 25px;
+    height: var(--code-line-height);
     padding-top: 1px;
     border-width: 2px 0;
     border-color: transparent;
@@ -140,12 +103,18 @@ body {
 
 .line-number {
     padding-top: 2px;
-    height: 25px;
-    font-size: 14px;
+    height: var(--code-line-height);
+    font-size: var(--code-font-size);
     line-height: 1.5;
     color: var(--grey-light);
 }
 
 #active-number {
     color: var(--white-dimmed);
+}
+
+/* TODO: fix*/
+.buffer {
+    width: 100%;
+    margin-top: 1px;
 }
