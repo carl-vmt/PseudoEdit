@@ -119,11 +119,17 @@ function getActiveLine() {
   let sel = window.getSelection();
   let node = sel.focusNode;
 
-  if (node === null) return;
+  if (node === null) {
+    return;
+  }
 
   while (node.className === null || node.className !== "line") {
-    if (node === null) return;
-    if (node.parentElement === null) return;
+    if (node === null) {
+      return;
+    }
+    if (node.parentElement === null) {
+      return;
+    }
 
     node = node.parentElement;
   }
@@ -135,11 +141,15 @@ function setActiveLine(line) {
   let activeline = document.getElementById("active-line");
   let activeNumber = document.getElementById("active-number");
 
-  if (activeline === line) return;
-  if (activeline !== undefined && activeline !== null)
+  if (activeline === line) {
+    return;
+  }
+  if (activeline !== undefined && activeline !== null) {
     activeline.removeAttribute("id");
-  if (activeNumber !== undefined && activeNumber !== null)
+  }
+  if (activeNumber !== undefined && activeNumber !== null) {
     activeNumber.removeAttribute("id");
+  }
 
   line.id = "active-line";
 
@@ -151,7 +161,9 @@ function setActiveLine(line) {
 
 //#region Caret Position
 function setCaretPosition(parent, range, stat) {
-  if (stat.done) return range;
+  if (stat.done) {
+    return range;
+  }
   if (parent.childNodes.length == 0) {
     if (parent.textContent.length >= stat.pos) {
       range.setStart(parent, stat.pos);
@@ -171,7 +183,9 @@ function setCaretPosition(parent, range, stat) {
 function getCaretPosition(parent, sel, stat) {
   let node = sel.focusNode;
   let offset = sel.focusOffset;
-  if (stat.done) return stat;
+  if (stat.done) {
+    return stat;
+  }
   let currentNode = null;
   if (parent.childNodes.length == 0) {
     stat.pos += parent.textContent.length;

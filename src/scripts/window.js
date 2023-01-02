@@ -40,7 +40,9 @@ function initChildObserver() {
       updateGraphics();
 
       let activeLine = getActiveLine();
-      if (activeLine === undefined) return;
+      if (activeLine === undefined) {
+        return;
+      }
       setActiveLine(activeLine);
     }
   };
@@ -61,19 +63,46 @@ function registerEventListeners() {
 
   //#region KeyDown Event
   codeBox.addEventListener("keydown", (event) => {
-    if (event.isComposing) return;
+    if (event.isComposing) {
+      return;
+    }
 
-    if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+    if (event.key.includes("Arrow")) {
       let activeLine = getActiveLine();
-      if (activeLine === undefined) return;
+      if (activeLine === undefined) {
+        return;
+      }
       let index = Array.from(codeBox.children).indexOf(activeLine);
+      let selection = window.getSelection();
+      let offset = selection.focusOffset;
 
       if (event.key === "ArrowDown") {
         index += 1;
-        if (index > codeBox.children.length - 1) return;
+        if (index > codeBox.children.length - 1) {
+          return;
+        }
+      } else if (event.key === "ArrowRight") {
+        if (
+          offset === activeLine.innerText.length ||
+          activeLine.innerHTML === "<br>"
+        ) {
+          index += 1;
+          if (index > codeBox.children.length - 1) {
+            return;
+          }
+        }
       } else if (event.key === "ArrowUp") {
         index -= 1;
-        if (index < 0) return;
+        if (index < 0) {
+          return;
+        }
+      } else if (event.key === "ArrowLeft") {
+        if (offset === 0) {
+          index -= 1;
+          if (index < 0) {
+            return;
+          }
+        }
       }
 
       updateEditor(codeBox.children[index], false);
@@ -104,8 +133,12 @@ function registerEventListeners() {
       event.preventDefault();
     } else if (codeBox.contains(target)) {
       while (target.className === null || target.className !== "line") {
-        if (target === null) return;
-        if (target.parentElement === null) return;
+        if (target === null) {
+          return;
+        }
+        if (target.parentElement === null) {
+          return;
+        }
 
         target = target.parentElement;
       }
