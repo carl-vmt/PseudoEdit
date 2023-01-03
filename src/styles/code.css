@@ -1,0 +1,69 @@
+.c-default {
+    color: var(--white);
+}
+
+.c-declarator {
+    color: var(--c-blue-light);
+}
+
+.c-keyword {
+    color: var(--c-blue-strong);
+}
+
+.c-number {
+    color: var(--c-green-light);
+}
+
+.c-string {
+    color: var(--c-orange);
+}
+
+.c-variable {
+    color: var(--c-blue-light);
+}
+
+.c-console {
+    color: var(--c-yellow);
+}
+
+.c-library {
+    color: var(--c-yellow);
+}
+
+.c-procedure {
+    color: var(--c-blue-strong);
+}
+
+.c-condition {
+    color: var(--c-pink);
+}
+
+.c-comment {
+    color: var(--c-green-dark);
+}
+
+.c-arrow {
+    color: var(--white);
+}
+
+.c-loop {
+    color: var(--c-pink);
+}
+
+.c-modifier {
+    color: var(--c-blue-strong);
+}
+
+.c-structure {
+    color: var(--c-green-light);
+}
+
+.c-bool-value {
+    color: var(--c-blue-strong);
+}
+
+.c-error {
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: var(--red);
+}

@@ -17,6 +17,14 @@
     --black: #151515;
     --blue: #264f78;
     --red: #ff0000;
+
+    --c-blue-strong: #55aaef;
+    --c-blue-light: #9cdcfe;
+    --c-yellow: #dcdcaa;
+    --c-orange: #d69d85;
+    --c-green-light: #4ec9b0;
+    --c-green-dark: #57a64a;
+    --c-pink: #d8a0df;
 }
 
 * {
@@ -76,6 +84,7 @@ body {
     font-weight: var(--code-font-weight);
     line-height: 1.5;
     overflow-wrap: normal;
+    caret-color: var(--white);
 }
 
 .line {

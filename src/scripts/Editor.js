@@ -17,22 +17,17 @@ function updateEditor(activeLine, validation) {
     return;
   }
 
-  // TODO: Implement Line formatting
-  return;
-
   let selection = window.getSelection();
   let position = getCaretPosition(activeLine, selection, {
     pos: 0,
     done: false,
   });
 
-  /*
   let newHTML = formatLine(activeLine);
   if (newHTML === null || newHTML === activeLine.innerHTML) {
     return;
   }
   activeLine.innerHTML = newHTML;
-  */
 
   selection.removeAllRanges();
   let range = setCaretPosition(activeLine, document.createRange(), {
