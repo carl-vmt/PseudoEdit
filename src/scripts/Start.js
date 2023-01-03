@@ -43,7 +43,7 @@ function createWindow() {
   window.once("ready-to-show", () => {
     window.show();
     window.focus();
-    window.webContents.openDevTools();
+    // window.webContents.openDevTools();
   });
 }
 
