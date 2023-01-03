@@ -1,4 +1,5 @@
-IDEAS
+ISSUES
 
-Idea #1:
-When you click on a line number, that whole line should be selected automatically.
+Issue #1:
+If you paste multiple lines at once, they all get added into a single line and basically break the editor.
+Copying works tho.
