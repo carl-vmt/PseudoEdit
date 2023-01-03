@@ -129,6 +129,21 @@ function registerEventListeners() {
       "app-button-box",
     ];
 
+    if (target.className === "line-number") {
+      let index = Array.from(numberBox.children).indexOf(target);
+      let line = codeBox.children[index];
+      let range = document.createRange();
+
+      range.setStart(line, 0);
+      range.setEndAfter(line, line.childElementCount);
+
+      let selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+
+      updateEditor();
+    }
+
     if (bannedClasses.includes(target.className)) {
       event.preventDefault();
     } else if (codeBox.contains(target)) {

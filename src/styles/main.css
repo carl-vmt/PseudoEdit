@@ -118,6 +118,10 @@ body {
     color: var(--grey-light);
 }
 
+.line-number:hover {
+    color: var(--white);
+}
+
 #active-number {
     color: var(--white-dimmed);
 }
