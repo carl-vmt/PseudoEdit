@@ -107,7 +107,6 @@ function registerEventListeners() {
 
       updateEditor(codeBox.children[index], false);
     } else if (event.key === "Tab") {
-      event.preventDefault();
       // autoComplete();
     }
   });
@@ -135,9 +134,17 @@ function registerEventListeners() {
       let range = document.createRange();
 
       range.setStart(line, 0);
-      range.setEndAfter(line, line.childElementCount);
+      range.setEndAfter(line, 0);
 
       let selection = window.getSelection();
+      selection.removeAllRanges();
+      selection.addRange(range);
+      range.collapse(true);
+
+      updateEditor();
+
+      range.collapse(false);
+      range.setEndAfter(line, line.childElementCount);
       selection.removeAllRanges();
       selection.addRange(range);
 

@@ -67,7 +67,10 @@ function formatLine(line) {
     }
 
     if (lastType === "keyword") {
-      if (/^[a-zA-Z0-9_-]+$/.test(el)) {
+      if (
+        /^[a-zA-Z0-9_]+$/.test(el) &&
+        !/^[0-9]+$/.test(el)
+      ) {
         if (type === "default" || type === "number") {
           elements.push(createArray("declarator", el));
           continue;
