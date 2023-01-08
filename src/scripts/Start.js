@@ -53,7 +53,7 @@ function setSecurityPolicy() {
       responseHeaders: {
         ...details.responseHeaders,
         "Content-Security-Policy": [
-          "default-src 'self'; style-src-elem 'self' https://fonts.googleapis.com/; font-src https://fonts.gstatic.com/",
+          "default-src 'self';",
         ],
       },
     });
