@@ -31,7 +31,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Cascadia Code', sans-serif;
+    font-family: 'Hack', sans-serif;
 }
 
 *::selection {
