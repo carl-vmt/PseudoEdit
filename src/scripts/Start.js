@@ -52,9 +52,7 @@ function setSecurityPolicy() {
     callback({
       responseHeaders: {
         ...details.responseHeaders,
-        "Content-Security-Policy": [
-          "default-src 'self';",
-        ],
+        "Content-Security-Policy": ["default-src 'self';"],
       },
     });
   });
@@ -66,7 +64,10 @@ function enableIpcCallbacks(window) {
   });
 
   ipcMain.on("max-window", () => {
-    if (window.isMaximized()) {
+    if (window.isFullScreen()) {
+      window.setFullScreen(false);
+      window.unmaximize();
+    } else if (window.isMaximized()) {
       window.unmaximize();
     } else {
       window.maximize();
