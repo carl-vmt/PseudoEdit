@@ -27,6 +27,7 @@ function updateEditor(activeLine, validation) {
   if (newHTML === null || newHTML === activeLine.innerHTML) {
     return;
   }
+
   activeLine.innerHTML = newHTML;
 
   selection.removeAllRanges();
