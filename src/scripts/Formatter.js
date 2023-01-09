@@ -96,7 +96,6 @@ function formatLine(line) {
     }
 
     // Special Chars
-    //replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
     if (el === "&") {
       elements.push(createArray(type, "&amp;"));
     } else if (el === "<") {
