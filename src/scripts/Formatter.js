@@ -24,12 +24,12 @@ function formatLine(line) {
     // STRINGS
     if (type === "quotation") {
       if (lastType === "string-open" || lastType === "string-inner") {
-        elements.push([el + "</span>", "string-close"]);
+        elements.push(['"' + "</span>", "string-close"]);
         continue;
       }
 
       elements.push([
-        '<span id="c-code" class="c-string">' + el,
+        '<span id="c-code" class="c-string">' + '"',
         "string-open",
       ]);
       continue;
@@ -95,14 +95,27 @@ function formatLine(line) {
         continue;
     }
 
-    //default
-    elements.push(createArray(type, el));
+    // Special Chars
+    //replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
+    if (el === "&") {
+      elements.push(createArray(type, "&amp;"));
+    } else if (el === "<") {
+      elements.push(createArray(type, "&lt;"));
+    } else if (el === ">") {
+      elements.push(createArray(type, "&gt;"));
+    } else {
+      // Default
+      elements.push(createArray(type, el));
+    }
   }
 
   var newHTML = "";
 
   for (var y = 0; y < elements.length; y++) {
     newHTML += elements[y][0];
+  }
+  if (!newHTML.endsWith("</span>")) {
+    newHTML += "</span>";
   }
 
   return newHTML;

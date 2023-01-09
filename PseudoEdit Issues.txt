@@ -14,6 +14,3 @@ ISSUES
 Issue #1:
 If you paste multiple lines at once, they all get added into a single line and basically break the editor.
 Copying works and pasting single lines works as well.
-
-Issue #2:
-Selecting text doesn't work if the selection contains a greater than (>) or less than (<) symbol.
