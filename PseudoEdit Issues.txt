@@ -13,4 +13,5 @@ ISSUES
 
 Issue #1:
 If you paste multiple lines at once, they all get added into a single line and basically break the editor.
-Copying works and pasting single lines works as well.
+Also, if you paste text, it keeps it's styling. 
+Instead, any text that you paste should be completely stripped from any styling.
