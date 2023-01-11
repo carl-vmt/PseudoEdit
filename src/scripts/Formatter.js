@@ -71,13 +71,23 @@ function formatLine(line) {
         if (type === "default" || type === "number") {
           elements.push(createArray("declarator", el));
           continue;
+        } else {
+          elements.push([
+            '<span id="c-code" class="c-' +
+              type +
+              ' c-error">' +
+              uel +
+              "</span>",
+            "error",
+          ]);
         }
+      } else {
+        elements.push([
+          '<span id="c-code" class="c-declarator c-error">' + el + "</span>",
+          "error",
+        ]);
       }
 
-      elements.push([
-        '<span id="c-code" class="c-error">' + el + "</span>",
-        "error",
-      ]);
       continue;
     }
 
