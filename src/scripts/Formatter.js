@@ -1,8 +1,11 @@
 function formatLine(line) {
+  if (line.innerText.length === 0) {
+    return null;
+  }
   const words = splitUp(line.innerText);
   const elements = [];
 
-  if (words.length === 0) return null;
+  if (words.length === 0 || words === undefined || words === null) return null;
 
   for (var x = 0; x < words.length; x++) {
     const el = words[x];
