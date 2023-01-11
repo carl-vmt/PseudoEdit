@@ -168,6 +168,111 @@ function registerEventListeners() {
     }
   };
   //#endregion
+
+  //#region Paste Event
+  codeBox.onpaste = function (event) {
+    //#region Get the pasted text
+    event.preventDefault();
+
+    if (!event.isTrusted) {
+      return;
+    }
+
+    let clipboardData = event.clipboardData || window.clipboardData;
+    let pastedData = clipboardData.getData("Text");
+    let pastedLines = Array.from(pastedData.split("\n")).filter(
+      (line) => line.length > 0
+    );
+    for (let i = 0; i < pastedLines.length; i++) {
+      pastedLines[i] = pastedLines[i].replaceAll("\r", "");
+    }
+
+    //#endregion
+
+    //#region Manage the first line
+    let activeLine = getActiveLine();
+    if (activeLine === null || activeLine === undefined) {
+      return;
+    }
+
+    let selection = window.getSelection();
+
+    let caretPosition = getCaretPosition(activeLine, selection, {
+      pos: 0,
+      done: false,
+    }).pos;
+    let firstHalf = activeLine.innerText.substring(0, caretPosition);
+    let secondHalf = activeLine.innerText.substring(caretPosition);
+
+    if (pastedLines.length === 1) {
+      activeLine.innerHTML = firstHalf + pastedLines[0] + secondHalf;
+      activeLine.innerHTML = formatLine(activeLine);
+
+      selection.removeAllRanges();
+      let range = setCaretPosition(activeLine, document.createRange(), {
+        pos: firstHalf.length + pastedLines[0].length,
+        done: false,
+      });
+      range.collapse(true);
+      selection.addRange(range);
+
+      return;
+    } else {
+      activeLine.innerHTML = firstHalf + pastedLines[0];
+      activeLine.innerHTML = formatLine(activeLine);
+    }
+    //#endregion
+
+    //#region Manage all lines except first and last one
+    let lastLine = activeLine;
+
+    for (let i = 1; i < pastedLines.length - 1; i++) {
+      let text = pastedLines[i];
+
+      let line = document.createElement("div");
+      line.className = "line";
+      line.innerHTML = text;
+      line.innerHTML = formatLine(line);
+      codeBox.appendChild(line);
+      codeBox.insertBefore(line, lastLine.nextSibling);
+      lastLine = line;
+    }
+    //#endregion
+
+    //#region Manage last line
+    let line = document.createElement("div");
+    line.className = "line";
+    let text = pastedLines[pastedLines.length - 1];
+    line.innerHTML = text + secondHalf;
+    line.innerHTML = formatLine(line);
+    codeBox.appendChild(line);
+    codeBox.insertBefore(line, lastLine.nextSibling);
+    lastLine = line;
+
+    selection.removeAllRanges();
+    let range = setCaretPosition(lastLine, document.createRange(), {
+      pos: text.length,
+      done: false,
+    });
+    range.collapse(true);
+    selection.addRange(range);
+    //#endregion
+
+    cleanEditorUp();
+    cleanLinesUp();
+
+    updateLineNumbers();
+    updateGraphics();
+    updateEditor();
+  };
+  //#endregion
+
+  //#region Cut Event
+  codeBox.oncut = function (event) {
+    //event.preventDefault();
+    //console.log(window.getSelection().toString().split("\n"));
+  };
+  //#endregion
 }
 
 registerEventListeners();
