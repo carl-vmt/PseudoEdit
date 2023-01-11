@@ -134,7 +134,6 @@ function registerEventListeners() {
       let range = document.createRange();
 
       range.setStart(line, 0);
-      range.setEndAfter(line, 0);
 
       let selection = window.getSelection();
       selection.removeAllRanges();
