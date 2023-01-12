@@ -1,7 +1,19 @@
-const { app, BrowserWindow, ipcMain, session } = require("electron");
+const {
+  app,
+  BrowserWindow,
+  ipcMain,
+  session,
+  globalShortcut,
+} = require("electron");
 const path = require("path");
 
 app.whenReady().then(() => {
+  globalShortcut.register("CommandOrControl+T", () => {
+    let windows = BrowserWindow.getAllWindows();
+    for (i in windows) {
+      windows[i].webContents.openDevTools();
+    }
+  });
   setSecurityPolicy();
   createWindow();
 
@@ -43,7 +55,6 @@ function createWindow() {
   window.once("ready-to-show", () => {
     window.show();
     window.focus();
-    // window.webContents.openDevTools();
   });
 }
 
