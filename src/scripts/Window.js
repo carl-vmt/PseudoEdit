@@ -174,15 +174,14 @@ function registerEventListeners() {
     //#region Get the pasted text
     event.preventDefault();
 
-    if (!event.isTrusted) {
-      return;
-    }
+    let pastedData = (event.originalEvent || event).clipboardData.getData(
+      "text/plain"
+    );
 
-    let clipboardData = event.clipboardData || window.clipboardData;
-    let pastedData = clipboardData.getData("Text");
-    let pastedLines = Array.from(pastedData.split("\n")).filter(
+    pastedLines = Array.from(pastedData.split("\n")).filter(
       (line) => line.length > 0
     );
+
     for (let i = 0; i < pastedLines.length; i++) {
       pastedLines[i] = pastedLines[i].replaceAll("\r", "");
     }
@@ -267,10 +266,15 @@ function registerEventListeners() {
   };
   //#endregion
 
-  //#region Cut Event
+  //#region Cut and Copy Events
   codeBox.oncut = function (event) {
-    //event.preventDefault();
-    //console.log(window.getSelection().toString().split("\n"));
+    selectedText = window.getSelection().toString();
+    navigator.clipboard.writeText(selectedText);
+  };
+
+  codeBox.oncopy = function (event) {
+    selectedText = window.getSelection().toString();
+    navigator.clipboard.writeText(selectedText);
   };
   //#endregion
 }
