@@ -18,7 +18,7 @@ app.whenReady().then(() => {
   globalShortcut.register("CommandOrControl+Z", () => {});
   globalShortcut.register("CommandOrControl+Y", () => {});
   globalShortcut.register("CommandOrControl+S", () => {});
-  
+
   setSecurityPolicy();
   createWindow();
 
