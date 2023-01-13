@@ -178,6 +178,10 @@ function registerEventListeners() {
       "text/plain"
     );
 
+    if (pastedData.length === 0) {
+      return;
+    }
+
     pastedLines = Array.from(pastedData.split("\n")).filter(
       (line) => line.length > 0
     );
