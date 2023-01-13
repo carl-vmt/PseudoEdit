@@ -14,6 +14,11 @@ app.whenReady().then(() => {
       windows[i].webContents.openDevTools();
     }
   });
+
+  globalShortcut.register("CommandOrControl+Z", () => {});
+  globalShortcut.register("CommandOrControl+Y", () => {});
+  globalShortcut.register("CommandOrControl+S", () => {});
+  
   setSecurityPolicy();
   createWindow();
 
