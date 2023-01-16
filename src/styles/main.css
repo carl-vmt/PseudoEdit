@@ -40,7 +40,7 @@
 
 *::-webkit-scrollbar {
     width: var(--scrollbar-width);
-    height: var(--scrollbar-width);
+    height: 0;
     background: var(--black);
 }
 
@@ -58,22 +58,24 @@ body {
 }
 
 .content {
-    position: fixed;
-    width: 100%;
     height: 100%;
-    margin-top: var(--titlebar-height);
+    min-width: 100%;
+    padding-top: var(--titlebar-height);
     overflow: scroll;
-    overflow-x: hidden;
 }
 
 .editor-container {
-    width: 100%;
+    min-width: 100%;
     display: flex;
     padding-top: var(--editor-padding);
 }
 
+.editor-container * {
+    overflow: normal;
+}
+
 .code-box-container {
-    width: 100%;
+    min-width: 100%;
 }
 
 #code-box {
