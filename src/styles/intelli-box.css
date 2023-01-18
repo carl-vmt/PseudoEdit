@@ -1,28 +1,31 @@
 .intelli-box {
-    width: 0;
+    display:  none;
     position: absolute;
-    background-color: #252526;
-    border-width: 0;
+    border-radius: 4px;
+    border-width: 1px;
     border-style: solid;
-    border-color: #454545;
+    border-color: var(--grey-mid);
+    padding: 5px;
     font-size: 14px;
-    display: table;
-    color: #e5e2e2;
-    font-weight: var(--code-font-weight);
+    background-color: var(--black);
 }
 
 .blue {
-    color: #2aaaff;
+    color: #1f82c4;
+    font-weight: 350;
 }
 
 .white {
     color: #fff;
+    font-weight: 350;
 }
 
 .blue-strong {
     color: #2aaaff;
+    font-weight: 600;
 }
 
 .white-strong {
     color: #fff;
+    font-weight: 600;
 }
