@@ -1,24 +1,7 @@
-const {
-  app,
-  BrowserWindow,
-  ipcMain,
-  session,
-  globalShortcut,
-} = require("electron");
+const { app, BrowserWindow, ipcMain, session } = require("electron");
 const path = require("path");
 
 app.whenReady().then(() => {
-  globalShortcut.register("CommandOrControl+T", () => {
-    let windows = BrowserWindow.getAllWindows();
-    for (i in windows) {
-      windows[i].webContents.openDevTools();
-    }
-  });
-
-  globalShortcut.register("CommandOrControl+Z", () => {});
-  globalShortcut.register("CommandOrControl+Y", () => {});
-  globalShortcut.register("CommandOrControl+S", () => {});
-
   setSecurityPolicy();
   createWindow();
 
