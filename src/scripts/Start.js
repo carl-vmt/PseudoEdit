@@ -76,4 +76,8 @@ function enableIpcCallbacks(window) {
   ipcMain.on("close-window", () => {
     window.close();
   });
+
+  ipcMain.on("open-devtools", () => {
+    window.openDevTools();
+  });
 }

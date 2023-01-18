@@ -61,12 +61,20 @@ function registerEventListeners() {
   codeBox.addEventListener("mouseup", updateEditor);
   codeBox.addEventListener("keyup", updateEditor);
 
+  //#region
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "F12") {
+      ipcRenderer.send("open-devtools");
+    }
+  });
+  //#endregion
+
   //#region KeyDown Event
   codeBox.addEventListener("keydown", (event) => {
     if (event.isComposing) {
       return;
     }
-    
+
     updateEditor();
 
     if (event.key.includes("Arrow")) {
