@@ -25,6 +25,7 @@ function updateEditor(activeLine, validation) {
 
   let newHTML = formatLine(activeLine);
   if (newHTML === null || newHTML === activeLine.innerHTML) {
+    updateIntelliBox();
     return;
   }
 
@@ -37,6 +38,8 @@ function updateEditor(activeLine, validation) {
   });
   range.collapse(true);
   selection.addRange(range);
+
+  updateIntelliBox();
 }
 
 function updateLineNumbers() {

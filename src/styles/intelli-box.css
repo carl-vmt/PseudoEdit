@@ -1,0 +1,28 @@
+.intelli-box {
+    width: 0;
+    position: absolute;
+    background-color: #252526;
+    border-width: 0;
+    border-style: solid;
+    border-color: #454545;
+    font-size: 14px;
+    display: table;
+    color: #e5e2e2;
+    font-weight: var(--code-font-weight);
+}
+
+.blue {
+    color: #2aaaff;
+}
+
+.white {
+    color: #fff;
+}
+
+.blue-strong {
+    color: #2aaaff;
+}
+
+.white-strong {
+    color: #fff;
+}

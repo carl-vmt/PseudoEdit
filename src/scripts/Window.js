@@ -66,6 +66,8 @@ function registerEventListeners() {
     if (event.isComposing) {
       return;
     }
+    
+    updateEditor();
 
     if (event.key.includes("Arrow")) {
       let activeLine = getActiveLine();
@@ -114,6 +116,8 @@ function registerEventListeners() {
 
   //#region MouseDown Event
   document.onmousedown = function (event) {
+    updateEditor();
+
     let target = "target" in event ? event.target : event.srcElement;
 
     let bannedClasses = [
