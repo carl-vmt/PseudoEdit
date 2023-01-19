@@ -170,8 +170,6 @@ function updateSelection() {
     active.className = "prediction";
   }
 
-  console.log(active);
-
   getPredictions()[selectionIndex].className = "active-prediction";
 }
 
@@ -182,41 +180,43 @@ function getPredictions() {
 }
 
 function autoComplete() {
-  let sel = window.getSelection();
-  let node = sel.focusNode;
-  let target = getTarget(node);
+  let selection = window.getSelection();
+  let target = selection.focusNode;
 
-  if (target === undefined) return;
+  while (
+    target === undefined ||
+    target === null ||
+    target.id !== "c-code" ||
+    target.className === "c-declarator" ||
+    target.className === "c-string" ||
+    target.className === "c-comment" ||
+    target.className === "c-number"
+  ) {
+    target = target.parentElement;
 
-  let offset = sel.focusOffset;
-  let pos = getCaretPosition(target, node, offset, {
+    if (target.parentElement === undefined || target.parentElement === null) {
+      return;
+    }
+  }
+
+  let activeLine = getActiveLine();
+  let position = getCaretPosition(activeLine, selection, {
     pos: 0,
     done: false,
   });
 
-  if (results.length === 0) {
-    if (node.id === "") {
-      target.innerText = "tab";
-    }
-    if (node.parentElement.id === "c-code") {
-    }
-    updateEditor();
-    return;
-  }
+  let oldLength = target.innerText.length;
+  target.innerHTML = getPredictions()[selectionIndex].innerText;
+  target.innerHTML += "&nbsp;";
+  let newLength = target.innerText.length;
 
-  let span = node.parentElement;
-  let oldLength = span.innerText.length;
-  span.innerHTML = results[0];
-  span.innerHTML += "&nbsp;";
-  let newLength = span.innerText.length;
-
-  sel.removeAllRanges();
-  let range = setCaretPosition(target, document.createRange(), {
-    pos: pos.pos - oldLength + newLength,
+  selection.removeAllRanges();
+  let range = setCaretPosition(activeLine, document.createRange(), {
+    pos: position.pos + (newLength - oldLength),
     done: false,
   });
   range.collapse(true);
-  sel.addRange(range);
+  selection.addRange(range);
 
   updateEditor();
 }
