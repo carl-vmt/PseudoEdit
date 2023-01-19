@@ -1,92 +1,84 @@
 function formatLine(line) {
-  if (line.innerText.length === 0) {
-    return null;
-  }
-  const words = splitUp(line.innerText);
-  const elements = [];
+  if (line.innerText.length === 0) return null;
+
+  let words = splitIntoWords(line.innerText);
+  let elements = [];
 
   if (words.length === 0 || words === undefined || words === null) return null;
 
-  for (var x = 0; x < words.length; x++) {
-    const el = words[x];
-    const uel = el.toUpperCase();
-    const type = getType(el);
-    const lastType = getLastType(elements, x);
+  for (let x = 0; x < words.length; x++) {
+    let word = words[x];
+    let upperWord = word.toUpperCase();
+    let type = getType(word);
+    let lastType = getLastType(elements, x);
 
-    // COMMENTS
     if (lastType === "comment") {
-      if (x === words.length - 1) {
-        elements.push([el + "</span>", "comment"]);
-        continue;
-      }
+      if (x === words.length - 1) elements.push([word + "</span>", "comment"]);
+      else elements.push([word, "comment"]);
 
-      elements.push([el, "comment"]);
       continue;
     }
 
-    // STRINGS
     if (type === "quotation") {
-      if (lastType === "string-open" || lastType === "string-inner") {
+      if (lastType === "string-open" || lastType === "string-inner")
         elements.push(['"' + "</span>", "string-close"]);
-        continue;
-      }
+      else
+        elements.push([
+          '<span id="c-code" class="c-string">' + '"',
+          "string-open",
+        ]);
 
-      elements.push([
-        '<span id="c-code" class="c-string">' + '"',
-        "string-open",
-      ]);
       continue;
     }
 
     if (lastType === "string-open" || lastType === "string-inner") {
-      elements.push([el, "string-inner"]);
+      elements.push([word, "string-inner"]);
       continue;
     }
 
     if (lastType === "string-open" || lastType === "string-inner") {
-      elements.push([el, "string-inner"]);
+      elements.push([word, "string-inner"]);
       continue;
     }
 
-    // COMMENTS
     if (type === "slash") {
-      if (x + 1 < words.length && getType(words[x + 1]) === "slash") {
-        elements.push(['<span id="c-code" class="c-comment">' + el, "comment"]);
-        continue;
-      }
+      if (x + 1 < words.length && getType(words[x + 1]) === "slash")
+        elements.push([
+          '<span id="c-code" class="c-comment">' + word,
+          "comment",
+        ]);
+      else elements.push(createArray(word, "slash"));
 
-      elements.push(createArray("slash", el));
       continue;
     }
 
-    switch (type) {
-      case "space":
-        elements.push(createArray("space", "&nbsp;"));
-        continue;
-
-      case "bool-value":
-        elements.push(createArray(type, el));
-        continue;
+    if (type === "space") {
+      elements.push(createArray("&nbsp;", "space"));
+      continue;
     }
 
-    if (lastType === "keyword") {
-      if (/^[a-zA-Z0-9_]+$/.test(el) && !/^[0-9]+$/.test(el)) {
-        if (type === "default" || type === "number") {
-          elements.push(createArray("declarator", el));
-          continue;
-        } else {
+    if (type === "statement") {
+      console.log(type + " " + word);
+      elements.push(createArray(word.toLowerCase(), type));
+      continue;
+    }
+
+    if (lastType === "variable-keyword") {
+      if (/^[a-zA-Z0-9_]+$/.test(word) && !/^[0-9]+$/.test(word)) {
+        if (type === "default" || type === "number")
+          elements.push(createArray(word, "declarator"));
+        else
           elements.push([
             '<span id="c-code" class="c-' +
               type +
               ' c-error">' +
-              uel +
+              upperWord +
               "</span>",
             "error",
           ]);
-        }
       } else {
         elements.push([
-          '<span id="c-code" class="c-declarator c-error">' + el + "</span>",
+          '<span id="c-code" class="c-declarator c-error">' + word + "</span>",
           "error",
         ]);
       }
@@ -94,179 +86,86 @@ function formatLine(line) {
       continue;
     }
 
-    // Handle Keywords, Modifiers, Structures, Console Statements, Conditions, Library functions and Loops
     switch (type) {
-      case "keyword":
+      case "variable-keyword":
       case "modifier":
       case "structure":
-      case "console":
+      case "console-function":
       case "condition":
       case "loop":
-      case "library":
-      case "procedure":
-        elements.push(createArray(type, uel));
+      case "library-function":
+      case "class-keyword":
+        elements.push(createArray(upperWord, type));
         continue;
     }
 
-    // Special Chars
-    if (el === "&") {
-      elements.push(createArray(type, "&amp;"));
-    } else if (el === "<") {
-      elements.push(createArray(type, "&lt;"));
-    } else if (el === ">") {
-      elements.push(createArray(type, "&gt;"));
-    } else {
-      // Default
-      elements.push(createArray(type, el));
-    }
+    if (word === "&") elements.push(createArray("&amp;", type));
+    else if (word === "<") elements.push(createArray("&lt;", type));
+    else if (word === ">") elements.push(createArray("&gt;", type));
+    else elements.push(createArray(word, type));
   }
 
-  var newHTML = "";
+  let newHTML = "";
 
-  for (var y = 0; y < elements.length; y++) {
+  for (let y = 0; y < elements.length; y++) {
     newHTML += elements[y][0];
   }
-  if (!newHTML.endsWith("</span>")) {
-    newHTML += "</span>";
-  }
+
+  if (!newHTML.endsWith("</span>")) newHTML += "</span>";
 
   return newHTML;
 }
 
-function createArray(type, el) {
-  return ['<span id="c-code" class="c-' + type + '">' + el + "</span>", type];
+function createArray(word, className) {
+  return [
+    '<span id="c-code" class="c-' + className + '">' + word + "</span>",
+    className,
+  ];
 }
 
-function getType(el) {
-  // WHITE SPACE
-  if (el.trim().length === 0) {
-    return "space";
-  }
+function getType(word) {
+  if (word.trim().length === 0) return "space";
+  else if (/^\d+$/.test(word)) return "number";
+  else if (word === '"' || word === "'") return "quotation";
+  else if (word === "/") return "slash";
 
-  // NUMBER
-  if (/^\d+$/.test(el)) {
-    return "number";
-  }
+  if (statements.includes(word.toLowerCase())) return "statement";
 
-  switch (el.toUpperCase()) {
-    case '"':
-      return "quotation";
+  let upperWord = word.toUpperCase();
 
-    case "/":
-      return "slash";
+  if (!all_words.includes(upperWord)) return "default";
 
-    case "INTEGER":
-    case "STRING":
-    case "REAL":
-    case "CHAR":
-    case "BOOLEAN":
-      return "keyword";
-
-    case "DECLARE":
-    case "CONSTANT":
-    case "STATIC":
-    case "PUBLIC":
-    case "PRIVATE":
-      return "modifier";
-
-    case "FALSE":
-    case "TRUE":
-    case "BREAK":
-    case "CONTINUE":
-    case "RETURN":
-      return "bool-value";
-
-    case "ARRAY":
-    case "LIST":
-    case "MAP":
-      return "structure";
-
-    case "INPUT":
-    case "OUTPUT":
-    case "PRINT":
-      return "console";
-
-    case "IF":
-    case "ELSE":
-    case "THEN":
-    case "ENDIF":
-    case "AND":
-    case "OR":
-    case "NOT":
-    case "CASE":
-    case "ENDCASE":
-    case "OTHERWISE":
-      return "condition";
-
-    case "FOR":
-    case "TO":
-    case "STEP":
-    case "NEXT":
-    case "WHILE":
-    case "DO":
-    case "ENDWHILE":
-    case "REPEAT":
-    case "UNTIL":
-    case "LOOP":
-    case "ENDLOOP":
-      return "loop";
-
-    case "MOD":
-    case "DIV":
-    case "ROUND":
-    case "RANDOM":
-    case "LENGTH":
-    case "SUBSTRING":
-    case "UPPER":
-    case "LOWER":
-    case "UCASE":
-    case "LCASE":
-    case "OPEN":
-    case "WRITE":
-    case "READ":
-    case "OPENFILE":
-    case "WRITEFILE":
-    case "READFILE":
-    case "CLOSEFILE":
-      return "library";
-
-    case "PROCEDURE":
-    case "ENDPROCEDURE":
-    case "CALL":
-    case "FUNCTION":
-    case "ENDFUNCTION":
-    case "RETURNS":
-      return "procedure";
-  }
-
-  return "default";
+  if (variable_keywords.includes(upperWord)) return "variable-keyword";
+  else if (modifiers.includes(upperWord)) return "modifier";
+  else if (structures.includes(upperWord)) return "structure";
+  else if (console_functions.includes(upperWord)) return "console-function";
+  else if (conditions.includes(upperWord)) return "condition";
+  else if (loops.includes(upperWord)) return "loop";
+  else if (library_functions.includes(upperWord)) return "library-function";
+  else if (class_keywords.includes(upperWord)) return "class-keyword";
 }
 
-function getLastType(elements, i) {
-  if (elements.length === 0 || i === 0) {
-    return "null";
-  }
+function getLastType(word, index) {
+  if (word.length === 0 || index === 0) return "null";
 
-  for (x = i - 1; x >= 0; x--) {
-    const type = elements[x][1];
+  for (x = index - 1; x >= 0; x--) {
+    let type = word[x][1];
 
-    if (type === "space") continue;
-
-    return type;
+    if (type !== "space") return type;
   }
 
   return "null";
 }
 
-function splitUp(text) {
+function splitIntoWords(text) {
   if (text === null) return;
   if (text.length === 0) return;
 
-  const result = [];
-  var currentElement = "";
+  let result = [];
+  let currentElement = "";
 
-  for (var x = 0; x < text.length; x++) {
-    const char = text.charAt(x);
+  for (let x = 0; x < text.length; x++) {
+    let char = text.charAt(x);
 
     if (/^[a-zA-Z0-9_]+$/.test(char)) {
       currentElement += char;
@@ -274,9 +173,7 @@ function splitUp(text) {
     }
 
     result.push(currentElement);
-    currentElement = char.toString();
-
-    result.push(currentElement);
+    result.push(char.toString());
     currentElement = "";
   }
 

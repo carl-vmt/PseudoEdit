@@ -6,7 +6,7 @@
     color: var(--c-blue-light);
 }
 
-.c-keyword {
+.c-variable-keyword {
     color: var(--c-blue-strong);
 }
 
@@ -22,15 +22,15 @@
     color: var(--c-blue-light);
 }
 
-.c-console {
+.c-console-function {
     color: var(--c-yellow);
 }
 
-.c-library {
+.c-library-function {
     color: var(--c-yellow);
 }
 
-.c-procedure {
+.c-class-keyword {
     color: var(--c-blue-strong);
 }
 
@@ -54,7 +54,7 @@
     color: var(--c-green-light);
 }
 
-.c-bool-value {
+.c-statement {
     color: var(--c-blue-strong);
 }
 

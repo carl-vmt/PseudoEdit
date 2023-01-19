@@ -1,30 +1,14 @@
-const all_keywords = [
-  "INTEGER",
-  "STRING",
-  "REAL",
-  "CHAR",
-  "BOOLEAN",
+const variable_keywords = ["INTEGER", "STRING", "REAL", "CHAR", "BOOLEAN"];
 
-  "DECLARE",
-  "CONSTANT",
-  "STATIC",
-  "PUBLIC",
-  "PRIVATE",
+const modifiers = ["DECLARE", "CONSTANT", "STATIC", "PUBLIC", "PRIVATE"];
 
-  "FALSE",
-  "TRUE",
-  "BREAK",
-  "CONTINUE",
-  "RETURN",
+const statements = ["false", "true", "break", "continue", "return"];
 
-  "ARRAY",
-  "LIST",
-  "MAP",
+const structures = ["ARRAY", "LIST", "MAP"];
 
-  "INPUT",
-  "OUTPUT",
-  "PRINT",
+const console_functions = ["INPUT", "OUTPUT", "PRINT"];
 
+const conditions = [
   "IF",
   "ELSE",
   "THEN",
@@ -35,7 +19,9 @@ const all_keywords = [
   "CASE",
   "ENDCASE",
   "OTHERWISE",
+];
 
+const loops = [
   "FOR",
   "TO",
   "STEP",
@@ -47,7 +33,9 @@ const all_keywords = [
   "UNTIL",
   "LOOP",
   "ENDLOOP",
+];
 
+const library_functions = [
   "MOD",
   "DIV",
   "ROUND",
@@ -65,7 +53,9 @@ const all_keywords = [
   "WRITEFILE",
   "READFILE",
   "CLOSEFILE",
+];
 
+const class_keywords = [
   "PROCEDURE",
   "ENDPROCEDURE",
   "CALL",
@@ -73,3 +63,14 @@ const all_keywords = [
   "ENDFUNCTION",
   "RETURNS",
 ];
+
+const all_words = variable_keywords.concat(
+  modifiers,
+  statements,
+  structures,
+  console_functions,
+  conditions,
+  loops,
+  library_functions,
+  class_keywords
+);

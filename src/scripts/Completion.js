@@ -6,7 +6,6 @@ function updateIntelliBox() {
   let sel = window.getSelection();
   let target = sel.focusNode;
 
-  //#region Find target div.
   while (
     target === undefined ||
     target === null ||
@@ -24,11 +23,9 @@ function updateIntelliBox() {
       return;
     }
   }
-  //#endregion
 
   let text = target.innerText.toUpperCase();
 
-  //#region Return if Content of target is emtpy
   if (
     text === "" ||
     text.trim().length === 0 ||
@@ -39,18 +36,20 @@ function updateIntelliBox() {
     selectionIndex = 0;
     return;
   }
-  //#endregion
 
-  results = all_keywords.filter((word) => word.startsWith(text));
+  results = all_words.filter((word) => word.toUpperCase().startsWith(text));
   let newHTML = "";
 
-  //#region Set the innerHTML of intelliBox
   let firstHalf = text;
 
   for (let i = 0; i < results.length; i++) {
     let secondHalf = results[i].substring(text.length, results[i].length);
 
-    let inner = createSpan("blue", firstHalf);
+    let inner = "";
+    if (statements.includes(results[i]))
+      inner += createSpan("blue", firstHalf.toLowerCase());
+    else inner += createSpan("blue", firstHalf);
+
     inner += createSpan("white", secondHalf);
 
     newHTML += createSpan("prediction", inner);
@@ -58,7 +57,6 @@ function updateIntelliBox() {
   }
 
   intelliBox.innerHTML = newHTML;
-  //#endregion
 
   let content = intelliBox.innerText;
 
