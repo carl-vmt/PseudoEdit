@@ -21,10 +21,10 @@ function formatLine(line) {
 
     if (type === "quotation") {
       if (lastType === "string-open" || lastType === "string-inner")
-        elements.push(['"' + "</span>", "string-close"]);
+        elements.push([word + "</span>", "string-close"]);
       else
         elements.push([
-          '<span id="c-code" class="c-string">' + '"',
+          '<span id="c-code" class="c-string">' + word,
           "string-open",
         ]);
 
