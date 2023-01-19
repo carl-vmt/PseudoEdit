@@ -74,8 +74,8 @@ function updateGraphics() {
   let content = document.getElementById("content");
   let winHeight = window.innerHeight;
 
-  buffer.style.marginTop = winHeight - 92 + "px";
-  content.style.height = winHeight - 65 + "px";
+  buffer.style.marginTop = winHeight - 88 + "px";
+  content.style.height = winHeight - 22 + "px";
 }
 //#endregion
 
