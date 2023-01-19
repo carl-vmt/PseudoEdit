@@ -66,6 +66,10 @@ function registerEventListeners() {
     if (event.key === "F12") {
       ipcRenderer.send("open-devtools");
     }
+
+    if (event.key === "Tab") {
+      event.preventDefault();
+    }
   });
   //#endregion
 
@@ -76,6 +80,37 @@ function registerEventListeners() {
     }
 
     updateEditor();
+
+    if (event.key === "Tab") {
+      event.preventDefault();
+    }
+
+    if (intelliBox.style.display === "block") {
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        selectionIndex -= 1;
+        if (selectionIndex < 0) {
+          selectionIndex = getPredictions().length - 1;
+        }
+        updateSelection();
+        return;
+      }
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        selectionIndex += 1;
+        if (selectionIndex >= getPredictions().length) {
+          selectionIndex = 0;
+        }
+        updateSelection();
+        return;
+      }
+
+      if (event.key === "Tab") {
+        autoComplete();
+        return;
+      }
+    }
 
     if (event.key.includes("Arrow")) {
       let activeLine = getActiveLine();
@@ -116,8 +151,6 @@ function registerEventListeners() {
       }
 
       updateEditor(codeBox.children[index], false);
-    } else if (event.key === "Tab") {
-      // autoComplete();
     }
   });
   //#endregion

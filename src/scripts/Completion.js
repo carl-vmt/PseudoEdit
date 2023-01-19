@@ -48,7 +48,6 @@ const keywords = [
   "UNTIL",
   "LOOP",
   "ENDLOOP",
-  "END",
 
   "MOD",
   "DIV",
@@ -77,14 +76,14 @@ const keywords = [
 
   "<-",
 ];
-var results = [];
+var selectionIndex = 0;
 
 function updateIntelliBox() {
-  results = [];
-
+  let results = [];
   let sel = window.getSelection();
   let target = sel.focusNode;
 
+  //#region Find target div.
   while (
     target === undefined ||
     target === null ||
@@ -98,12 +97,15 @@ function updateIntelliBox() {
 
     if (target.parentElement === undefined || target.parentElement === null) {
       intelliBox.style.display = "none";
+      selectionIndex = 0;
       return;
     }
   }
+  //#endregion
 
-  let text = target.innerText;
+  let text = target.innerText.toUpperCase();
 
+  //#region Return if Content of target is emtpy
   if (
     text === "" ||
     text.trim().length === 0 ||
@@ -111,34 +113,37 @@ function updateIntelliBox() {
     text === " "
   ) {
     intelliBox.style.display = "none";
+    selectionIndex = 0;
     return;
   }
+  //#endregion
 
-  results = keywords.filter((word) => word.startsWith(text.toUpperCase()));
-  intelliBox.innerHTML = "";
+  results = keywords.filter((word) => word.startsWith(text));
+  let newHTML = "";
+
+  //#region Set the innerHTML of intelliBox
+  let firstHalf = text;
 
   for (let i = 0; i < results.length; i++) {
-    let keyStart = text.toUpperCase();
-    let keyEnd = results[i].substring(text.length, results[i].length);
+    let secondHalf = results[i].substring(text.length, results[i].length);
 
-    if (i === 0) {
-      intelliBox.innerHTML += createSpan("blue-strong", keyStart);
-      intelliBox.innerHTML += createSpan("white-strong", keyEnd);
-    } else {
-      intelliBox.innerHTML += createSpan("blue", keyStart);
-      intelliBox.innerHTML += createSpan("white", keyEnd);
-    }
-    intelliBox.innerHTML += "<br>";
+    let inner = createSpan("blue", firstHalf);
+    inner += createSpan("white", secondHalf);
+
+    newHTML += createSpan("prediction", inner);
+    newHTML += "<br>";
   }
 
-  let content = intelliBox.innerText.toUpperCase().replace(/\s/g, "");
+  intelliBox.innerHTML = newHTML;
+  //#endregion
 
-  if (content === text.toUpperCase() || content.length === 0) {
+  let content = intelliBox.innerText;
+
+  if (content === text || content.length === 0) {
     intelliBox.style.display = "none";
+    selectionIndex = 0;
     return;
   }
-
-  intelliBox.style.display = "block";
 
   let topOffset = target.getBoundingClientRect().top;
   let bottomOffset = target.getBoundingClientRect().bottom;
@@ -150,11 +155,30 @@ function updateIntelliBox() {
     intelliBox.style.top = bottomOffset - 22 - intelliBox.offsetHeight + "px";
 
   intelliBox.style.left = rightOffset + 3 + "px";
-  intelliBox.style.position = "absolute";
+
+  updateSelection();
+  intelliBox.style.display = "block";
 }
 
 function createSpan(type, el) {
   return '<span class="' + type + '">' + el + "</span>";
+}
+
+function updateSelection() {
+  let active = document.getElementsByClassName("active-prediction")[0];
+  if (active !== null && active !== undefined) {
+    active.className = "prediction";
+  }
+
+  console.log(active);
+
+  getPredictions()[selectionIndex].className = "active-prediction";
+}
+
+function getPredictions() {
+  return Array.from(intelliBox.children).filter(
+    (elem) => elem.innerHTML.length > 0
+  );
 }
 
 function autoComplete() {

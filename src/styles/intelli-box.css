@@ -1,5 +1,5 @@
 .intelli-box {
-    display:  none;
+    display: none;
     position: absolute;
     border-radius: 4px;
     border-width: 1px;
@@ -10,6 +10,16 @@
     background-color: var(--black);
 }
 
+.active-prediction .blue {
+    color: #2aaaff;
+    font-weight: 600;
+}
+
+.active-prediction .white {
+    color: #fff;
+    font-weight: 600;
+}
+
 .blue {
     color: #1f82c4;
     font-weight: 350;
@@ -18,14 +28,4 @@
 .white {
     color: #fff;
     font-weight: 350;
-}
-
-.blue-strong {
-    color: #2aaaff;
-    font-weight: 600;
-}
-
-.white-strong {
-    color: #fff;
-    font-weight: 600;
 }
