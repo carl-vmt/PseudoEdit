@@ -1,81 +1,4 @@
 const intelliBox = document.getElementById("intelli-box");
-const keywords = [
-  "INTEGER",
-  "STRING",
-  "REAL",
-  "CHAR",
-  "BOOLEAN",
-
-  "DECLARE",
-  "CONSTANT",
-  "STATIC",
-  "PUBLIC",
-  "PRIVATE",
-
-  "FALSE",
-  "TRUE",
-  "BREAK",
-  "CONTINUE",
-  "RETURN",
-
-  "ARRAY",
-  "LIST",
-  "MAP",
-
-  "INPUT",
-  "OUTPUT",
-  "PRINT",
-
-  "IF",
-  "ELSE",
-  "THEN",
-  "ENDIF",
-  "AND",
-  "OR",
-  "NOT",
-  "CASE",
-  "ENDCASE",
-  "OTHERWISE",
-
-  "FOR",
-  "TO",
-  "STEP",
-  "NEXT",
-  "WHILE",
-  "DO",
-  "ENDWHILE",
-  "REPEAT",
-  "UNTIL",
-  "LOOP",
-  "ENDLOOP",
-
-  "MOD",
-  "DIV",
-  "ROUND",
-  "RANDOM",
-  "LENGTH",
-  "SUBSTRING",
-  "UPPER",
-  "LOWER",
-  "UCASE",
-  "LCASE",
-  "OPEN",
-  "WRITE",
-  "READ",
-  "OPENFILE",
-  "WRITEFILE",
-  "READFILE",
-  "CLOSEFILE",
-
-  "PROCEDURE",
-  "ENDPROCEDURE",
-  "CALL",
-  "FUNCTION",
-  "ENDFUNCTION",
-  "RETURNS",
-
-  "<-",
-];
 var selectionIndex = 0;
 
 function updateIntelliBox() {
@@ -118,7 +41,7 @@ function updateIntelliBox() {
   }
   //#endregion
 
-  results = keywords.filter((word) => word.startsWith(text));
+  results = all_keywords.filter((word) => word.startsWith(text));
   let newHTML = "";
 
   //#region Set the innerHTML of intelliBox
