@@ -64,7 +64,7 @@ const class_keywords = [
   "RETURNS",
 ];
 
-const all_words = variable_keywords.concat(
+const all_keywords = variable_keywords.concat(
   modifiers,
   statements,
   structures,

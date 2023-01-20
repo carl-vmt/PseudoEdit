@@ -133,7 +133,7 @@ function getType(word) {
 
   let upperWord = word.toUpperCase();
 
-  if (!all_words.includes(upperWord)) return "default";
+  if (!all_keywords.includes(upperWord)) return "default";
 
   if (variable_keywords.includes(upperWord)) return "variable-keyword";
   else if (modifiers.includes(upperWord)) return "modifier";

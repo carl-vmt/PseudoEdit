@@ -37,7 +37,7 @@ function updateIntelliBox() {
     return;
   }
 
-  results = all_words.filter((word) => word.toUpperCase().startsWith(text));
+  results = all_keywords.filter((word) => word.toUpperCase().startsWith(text));
   let newHTML = "";
 
   let firstHalf = text;
