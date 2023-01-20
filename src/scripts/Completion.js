@@ -67,15 +67,23 @@ function updateIntelliBox() {
   }
 
   let topOffset = target.getBoundingClientRect().top;
-  let bottomOffset = target.getBoundingClientRect().bottom;
   let rightOffset = target.getBoundingClientRect().right;
 
-  if (topOffset <= window.innerHeight / 2)
+  if (topOffset <= window.innerHeight / 2) {
     intelliBox.style.top = topOffset + 20 + "px";
-  else
-    intelliBox.style.top = bottomOffset - 22 - intelliBox.offsetHeight + "px";
+    intelliBox.style.bottom = "auto";
+  } else {
+    intelliBox.style.bottom = window.innerHeight - topOffset + 5 + "px";
+    intelliBox.style.top = "auto";
+  }
 
-  intelliBox.style.left = rightOffset + 3 + "px";
+  if (rightOffset <= (window.innerWidth / 3) * 2) {
+    intelliBox.style.left = rightOffset + 3 + "px";
+    intelliBox.style.right = "auto";
+  } else {
+    intelliBox.style.right = window.innerWidth - rightOffset + 3 + "px";
+    intelliBox.style.left = "auto";
+  }
 
   updateSelection();
   intelliBox.style.display = "block";
