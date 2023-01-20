@@ -125,7 +125,7 @@ function createArray(word, className) {
 
 function getType(word) {
   if (word.trim().length === 0) return "space";
-  else if (/^\d+$/.test(word)) return "number";
+  else if (/^[0-9.]+$/.test(word) && !/^[.]+$/.test(word)) return "number";
   else if (word === '"' || word === "'") return "quotation";
   else if (word === "/") return "slash";
 
@@ -168,6 +168,11 @@ function splitIntoWords(text) {
     let char = text.charAt(x);
 
     if (/^[a-zA-Z0-9_]+$/.test(char)) {
+      currentElement += char;
+      continue;
+    }
+
+    if (/^[0-9]+$/.test(currentElement) && char === ".") {
       currentElement += char;
       continue;
     }
