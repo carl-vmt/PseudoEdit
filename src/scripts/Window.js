@@ -61,7 +61,7 @@ function registerEventListeners() {
   codeBox.addEventListener("mouseup", updateEditor);
   codeBox.addEventListener("keyup", updateEditor);
 
-  //#region
+  //#region DevTools Shortcut F12
   document.addEventListener("keydown", (event) => {
     if (event.key === "F12") {
       ipcRenderer.send("open-devtools");
@@ -244,6 +244,10 @@ function registerEventListeners() {
     }
 
     let selection = window.getSelection();
+
+    if (!selection.isCollapsed) {
+      selection.deleteFromDocument();
+    }
 
     let caretPosition = getCaretPosition(activeLine, selection, {
       pos: 0,
