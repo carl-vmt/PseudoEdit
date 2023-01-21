@@ -2,7 +2,7 @@
   "name": "pseudoedit",
   "productName": "PseudoEdit",
   "version": "1.0.0",
-  "description": "CodeEditor for PseudoCode.",
+  "description": "CodeEditor for PseudoCode",
   "main": "src/scripts/Start.js",
   "scripts": {
     "start": "electron ."
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/carl-vmt/PseudoEdit#readme",
   "devDependencies": {
-    "electron": "^22.0.0"
+    "electron": "^22.0.0",
+    "electron-wix-msi": "^5.0.0"
   },
   "dependencies": {
     "uuid": "^9.0.0"
