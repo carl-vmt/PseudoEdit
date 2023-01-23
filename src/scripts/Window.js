@@ -270,6 +270,10 @@ function registerEventListeners() {
       range.collapse(true);
       selection.addRange(range);
 
+      cleanEditorUp();
+      cleanLinesUp();
+      updateEditor();
+
       return;
     } else {
       activeLine.innerHTML = firstHalf + pastedLines[0];
