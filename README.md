@@ -5,7 +5,6 @@ It provides syntax highlighting, finds common errors and suggests auto-completio
   
 <br>
 
-## Installation
+## Download
   
-Download the latest installer from the [github releases](https://github.com/carl-vmt/PseudoEdit/releases).  
-After the file is downloaded, simply double-click to open and the program is ready to go.
+You can download the program from the [github releases page](https://github.com/carl-vmt/PseudoEdit/releases). 
