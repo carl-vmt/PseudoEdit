@@ -1,7 +1,5 @@
 .vscode/
 start.bat
-build.bat
 node_modules/
 PseudoEdit-win32-x64/
-windows_installer/
 PseudoEdit-Issues.txt
