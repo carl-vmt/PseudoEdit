@@ -1,5 +1,7 @@
 const { ipcRenderer } = require("electron");
 
+ipcRenderer.send("max-window");
+
 //#region App Buttons
 function registerAppButtons() {
   let minBtn = document.getElementById("min-button");
