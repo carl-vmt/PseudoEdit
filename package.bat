@@ -1,0 +1,1 @@
+electron-packager ./ PseudoEdit --platform=win32 --arch=x64 --icon="C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico" --ignore=\.gitignore --ignore=\start.bat --ignore=\build.bat --ignore=\PseudoEdit-Issues.txt --ignore=\.gitattributes --overwrite
