@@ -23,13 +23,13 @@ DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
 OutputDir=C:\Users\mutiu\repos\PseudoEdit\installer
-OutputBaseFilename=PseudoEdit Setup
+OutputBaseFilename=PseudoEdit-Setup
 SetupIconFile=C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
-ArchitecturesInstallIn64BitMode=x64
 ShowLanguageDialog=no
+WizardResizable=True
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -56,7 +56,6 @@ Source: "C:\Users\mutiu\repos\PseudoEdit\PseudoEdit-win32-x64\vk_swiftshader_icd
 Source: "C:\Users\mutiu\repos\PseudoEdit\PseudoEdit-win32-x64\vulkan-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "..\PseudoEdit-win32-x64\resources\*"; DestDir: "{app}\resources"; Flags: ignoreversion createallsubdirs recursesubdirs
-Source: "..\PseudoEdit-win32-x64\locales\*"; DestDir: "{app}\locales"; Flags: ignoreversion createallsubdirs recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
