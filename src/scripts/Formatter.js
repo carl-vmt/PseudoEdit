@@ -12,6 +12,12 @@ function formatLine(line) {
     let type = getType(word);
     let lastType = getLastType(elements, x);
 
+    if (words.length > x + 1 && word === "<" && words[x + 1] === "-") {
+      word = "&#8592;";
+      type = "arrow";
+      words[x + 1] = "&nbsp;";
+    }
+
     if (lastType === "comment") {
       if (x === words.length - 1) elements.push([word + "</span>", "comment"]);
       else elements.push([word, "comment"]);
@@ -58,7 +64,6 @@ function formatLine(line) {
     }
 
     if (type === "statement") {
-      console.log(type + " " + word);
       elements.push(createArray(word.toLowerCase(), type));
       continue;
     }
