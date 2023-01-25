@@ -60,6 +60,7 @@ Source: "C:\Users\mutiu\repos\PseudoEdit\PseudoEdit-win32-x64\vulkan-1.dll"; Des
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "..\PseudoEdit-win32-x64\resources\*"; DestDir: "{app}\resources"; Flags: ignoreversion createallsubdirs recursesubdirs
 Source: "C:\Windows\Fonts\Hack-Regular.ttf"; DestDir: "{fonts}"; FontInstall: "Hack Regular"; Flags: onlyifdoesntexist uninsneveruninstall
+Source: "C:\Windows\Fonts\Hack-Bold.ttf"; DestDir: "{fonts}"; FontInstall: "Hack Bold"; Flags: onlyifdoesntexist uninsneveruninstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
