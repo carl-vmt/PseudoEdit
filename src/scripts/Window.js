@@ -108,7 +108,8 @@ function registerEventListeners() {
         return;
       }
 
-      if (event.key === "Tab") {
+      if (event.key === "Tab" || event.key === "Enter") {
+        event.preventDefault();
         autoComplete();
         return;
       }

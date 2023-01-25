@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "PseudoEdit"
-#define MyAppVersion "1.0.0"
+#define MyAppVersion "1.0.3"
 #define MyAppPublisher "Carl Mutius"
 #define MyAppURL "https://github.com/carl-vmt/PseudoEdit"
 #define MyAppExeName "PseudoEdit.exe"
@@ -26,7 +26,7 @@ OutputDir=C:\Users\mutiu\repos\PseudoEdit\installer\out
 OutputBaseFilename=PseudoEdit-Setup
 SetupIconFile=C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico
 UninstallDisplayIcon=C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico
-UninstallDisplayName=PseudoEdit
+UninstallDisplayName=PseudoEdit V{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -59,6 +59,7 @@ Source: "C:\Users\mutiu\repos\PseudoEdit\PseudoEdit-win32-x64\vk_swiftshader_icd
 Source: "C:\Users\mutiu\repos\PseudoEdit\PseudoEdit-win32-x64\vulkan-1.dll"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 Source: "..\PseudoEdit-win32-x64\resources\*"; DestDir: "{app}\resources"; Flags: ignoreversion createallsubdirs recursesubdirs
+Source: "C:\Windows\Fonts\Hack-Regular.ttf"; DestDir: "{fonts}"; FontInstall: "Hack Regular"; Flags: onlyifdoesntexist uninsneveruninstall
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
@@ -66,9 +67,3 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
 
 [Run]
-
-[Registry]
-Root: "HKCR"; Subkey: ".pseudo"; ValueType: string; ValueData: "{#MyAppName}"; Flags: deletevalue
-Root: "HKCR"; Subkey: "{#MyAppName}"; ValueType: string; ValueData: "Program {#MyAppName}"; Flags: deletekey
-Root: "HKCR"; Subkey: "{#MyAppName}\DefaultIcon"; ValueType: string; ValueData: "{app}\{#MyAppExeName},0"
-Root: "HKCR"; Subkey: "{#MyAppName}\shell\open\command"; ValueType: string; ValueData: """""{app}\{#MyAppExeName}"""" """"%1"""""
