@@ -19,6 +19,7 @@ const conditions = [
   "CASE",
   "ENDCASE",
   "OTHERWISE",
+  "OF"
 ];
 
 const loops = [
