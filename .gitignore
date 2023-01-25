@@ -3,4 +3,4 @@ start.bat
 node_modules/
 PseudoEdit-win32-x64/
 PseudoEdit-Issues.txt
-installer/PseudoEdit-Setup.exe
+installer/out/

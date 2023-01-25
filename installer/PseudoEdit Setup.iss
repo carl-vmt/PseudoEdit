@@ -22,14 +22,17 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DefaultGroupName={#MyAppName}
 AllowNoIcons=yes
-OutputDir=C:\Users\mutiu\repos\PseudoEdit\installer
+OutputDir=C:\Users\mutiu\repos\PseudoEdit\installer\out
 OutputBaseFilename=PseudoEdit-Setup
 SetupIconFile=C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico
+UninstallDisplayIcon=C:\Users\mutiu\repos\PseudoEdit\src\resources\icon.ico
+UninstallDisplayName=PseudoEdit
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 ShowLanguageDialog=no
 WizardResizable=True
+ChangesAssociations=True
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -63,4 +66,9 @@ Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: 
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: quicklaunchicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+
+[Registry]
+Root: "HKCR"; Subkey: ".pseudo"; ValueType: string; ValueData: "{#MyAppName}"; Flags: deletevalue
+Root: "HKCR"; Subkey: "{#MyAppName}"; ValueType: string; ValueData: "Program {#MyAppName}"; Flags: deletekey
+Root: "HKCR"; Subkey: "{#MyAppName}\DefaultIcon"; ValueType: string; ValueData: "{app}\{#MyAppExeName},0"
+Root: "HKCR"; Subkey: "{#MyAppName}\shell\open\command"; ValueType: string; ValueData: """""{app}\{#MyAppExeName}"""" """"%1"""""
