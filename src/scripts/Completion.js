@@ -23,7 +23,6 @@ function updateIntelliBox() {
       return;
     }
   }
-
   let text = target.innerText.toUpperCase();
 
   if (
@@ -37,18 +36,20 @@ function updateIntelliBox() {
     return;
   }
 
-  results = all_keywords.filter((word) => word.toUpperCase().startsWith(text));
+  results = all_keywords
+    .concat(getVariableValues())
+    .filter((word) => word.toUpperCase().startsWith(text));
   let newHTML = "";
 
-  let firstHalf = text;
-
   for (let i = 0; i < results.length; i++) {
-    let secondHalf = results[i].substring(text.length, results[i].length);
-
+    let secondHalf = results[i].substring(text.length);
     let inner = "";
+
     if (statements.includes(results[i]))
-      inner += createSpan("blue", firstHalf.toLowerCase());
-    else inner += createSpan("blue", firstHalf);
+      inner += createSpan("blue", text.toLowerCase());
+    else if (getVariableValues().includes(results[i]))
+      inner += createSpan("blue", results[i].substring(0, text.length));
+    else inner += createSpan("blue", text);
 
     inner += createSpan("white", secondHalf);
 

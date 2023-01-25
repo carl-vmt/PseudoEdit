@@ -1,4 +1,5 @@
 function formatLine(line) {
+  getVariables();
   if (line.innerText.length === 0) return null;
 
   let words = splitIntoWords(line.innerText);
@@ -104,6 +105,11 @@ function formatLine(line) {
         continue;
     }
 
+    if (getVariableValues().includes(word)) {
+      elements.push(createArray(word, "variable"));
+      continue;
+    }
+
     if (word === "&") elements.push(createArray("&amp;", type));
     else if (word === "<") elements.push(createArray("&lt;", type));
     else if (word === ">") elements.push(createArray("&gt;", type));
@@ -189,4 +195,32 @@ function splitIntoWords(text) {
 
   result.push(currentElement);
   return result.filter((word) => word.length > 0 && word !== "\n");
+}
+
+function getVariables() {
+  let variables = Array.from(codeBox.getElementsByTagName("*")).filter(
+    (element) => element.className === "c-declarator"
+  );
+
+  let results = [];
+
+  for (let i = 0; i < variables.length; i++) {
+    let element = variables[i];
+    let variable = element.innerText;
+    let lineIndex =
+      Array.from(codeBox.children).indexOf(element.parentElement) + 1;
+
+    results.push([variable, lineIndex]);
+  }
+
+  return results;
+}
+
+function getVariableValues() {
+  let variables = getVariables();
+  let results = [];
+  for (let i = 0; i < variables.length; i++) {
+    results.push(variables[i][0]);
+  }
+  return results;
 }
