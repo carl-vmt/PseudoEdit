@@ -38,7 +38,8 @@ function updateIntelliBox() {
 
   results = all_keywords
     .concat(getVariableValues())
-    .filter((word) => word.toUpperCase().startsWith(text));
+    .filter((word) => word.toUpperCase().startsWith(text))
+    .sort();
   let newHTML = "";
 
   for (let i = 0; i < results.length; i++) {

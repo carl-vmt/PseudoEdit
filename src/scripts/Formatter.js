@@ -178,6 +178,22 @@ function splitIntoWords(text) {
   for (let x = 0; x < text.length; x++) {
     let char = text.charAt(x);
 
+    if (
+      x + 5 < text.length &&
+      char === "&" &&
+      text.charAt(x + 1) === "n" &&
+      text.charAt(x + 2) === "b" &&
+      text.charAt(x + 3) === "s" &&
+      text.charAt(x + 4) === "p" &&
+      text.charAt(x + 5) === ";"
+    ) {
+      x += 5;
+      currentElement = "&nbsp;";
+      result.push(currentElement);
+      currentElement = "";
+      continue;
+    }
+
     if (/^[a-zA-Z0-9_]+$/.test(char)) {
       currentElement += char;
       continue;

@@ -115,6 +115,50 @@ function registerEventListeners() {
       }
     }
 
+    if (event.key === "Tab") {
+      let selection = window.getSelection();
+      let target = selection.focusNode;
+
+      let insert = false;
+
+      if (target.className === "line") {
+        insert = true;
+      } else if (target.className === undefined) {
+        target = target.parentElement;
+      }
+
+      let activeLine = getActiveLine();
+      let position = getCaretPosition(activeLine, selection, {
+        pos: 0,
+        done: false,
+      });
+
+      let pos = position.pos;
+
+      if (insert) {
+        let span = document.createElement("span");
+        span.className = "c-space";
+        span.innerText = "&nbsp;&nbsp;&nbsp;";
+
+        activeLine.appendChild(span);
+        pos += 3;
+      } else {
+        target.innerText += "&nbsp;&nbsp;&nbsp;";
+        pos += 3;
+      }
+
+      selection.removeAllRanges();
+      let range = setCaretPosition(activeLine, document.createRange(), {
+        pos: pos,
+        done: false,
+      });
+      range.collapse(true);
+      selection.addRange(range);
+
+      updateEditor();
+      return;
+    }
+
     if (event.key.includes("Arrow")) {
       let activeLine = getActiveLine();
       if (activeLine === undefined) {
