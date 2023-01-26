@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "PseudoEdit"
-#define MyAppVersion "1.0.4"
+#define MyAppVersion "1.0.5"
 #define MyAppPublisher "Carl Mutius"
 #define MyAppURL "https://github.com/carl-vmt/PseudoEdit"
 #define MyAppExeName "PseudoEdit.exe"
